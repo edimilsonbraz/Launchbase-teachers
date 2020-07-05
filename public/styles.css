@@ -89,7 +89,7 @@ header {
     }
 }
 
-/* Details */
+/*==== DETAILS ====*/
 
 .details {
     color: black;
@@ -104,7 +104,7 @@ header {
 
 .details .item {
     border-top: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 16px;
+    padding: 16px 8px;
     margin-left: 32px;
 }
 
@@ -148,3 +148,43 @@ header {
     margin-right: 4px;
 }
 
+/*==== FORM ====*/
+
+input {
+    width: 95%;
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #555;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 6px;
+}
+input[type="radio"] {
+    width: initial;
+    margin: 8px 4px 4px 8px;
+}
+
+select option {
+    background-color: rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+}
+
+input::placeholder {
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.308);
+    font-weight: normal;
+}
+
+button[type="submit"] {
+    background-color: #FFDE01;
+    color: white;
+    width: 100%;
+    padding: 16px 32px;
+    border-radius: 4px;
+    margin-top: 32px;
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
