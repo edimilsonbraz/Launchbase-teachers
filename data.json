@@ -1,0 +1,44 @@
+{
+  "teachers": [
+    {
+      "id": 1,
+      "avatar_url": "http://google.com",
+      "name": "Daniel Araujo",
+      "birth": 339984000000,
+      "scholarity": "ensinosuperior",
+      "lesson": "on",
+      "matter": "Fisica, Matemática",
+      "created_at": 1594234541324
+    },
+    {
+      "avatar_url": "http:google.com",
+      "name": "Fafael Ribeiro",
+      "birth": 652406400000,
+      "scholarity": "mestrado",
+      "lesson": "on",
+      "matter": "Português, inglês",
+      "created_at": 1594234865785,
+      "id": 2
+    },
+    {
+      "id": 3,
+      "avatar_url": "http://google.com",
+      "name": "Mayke Brito",
+      "birth": 655516800000,
+      "scholarity": "ensinomedio",
+      "lesson": "on",
+      "matter": "Front-end, javaScript",
+      "created_at": 1594235306123
+    },
+    {
+      "id": 4,
+      "avatar_url": "http://google.com",
+      "name": "Fabiano Ferreira",
+      "birth": 158544000000,
+      "scholarity": "Mestrado",
+      "lesson": "À distancia",
+      "matter": "Dentista",
+      "created_at": 1594236106215
+    }
+  ]
+}

@@ -178,10 +178,10 @@ input::placeholder {
 button[type="submit"] {
     background-color: #FFDE01;
     color: white;
-    width: 100%;
+    width: 86%;
     padding: 16px 32px;
     border-radius: 4px;
-    margin-top: 32px;
+    margin: 32px;
     font-size: 16px;
     font-weight: bold;
 
