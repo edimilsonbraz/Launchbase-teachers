@@ -1,6 +1,8 @@
 const fs = require('fs')//fire sistem ... arquivos do sistema que vai criar e grava o arquivo .json
 const data = require("./data.json")
+const { age, date, graduation } = require('./utils')
 
+//Create
 exports.post = function(req, res) {
  
     const keys = Object.keys(req.body)
@@ -12,11 +14,11 @@ exports.post = function(req, res) {
         }
     }
 
-    let {avatar_url, birth, name, scholarity, matter, lesson} = req.body
+    let {avatar_url, birth, name, scholarity, matters, lesson} = req.body
 
-    birth = Date.parse(req.body.birth)
+    birth = Date.parse(birth)
     const created_at = Date.now()
-    const id = Number(data.teachers.length + 1)
+    id = Number(data.teachers.length + 1)
 
     data.teachers.push({        //desestruturação do Objeto req.body
         id,
@@ -25,7 +27,7 @@ exports.post = function(req, res) {
         birth,
         scholarity,
         lesson,
-        matter,
+        matters,
         created_at,
     })
 
@@ -37,5 +39,46 @@ exports.post = function(req, res) {
     })
 
         //return res.send(req.body)
+}
+
+//Show
+exports.show = function(req, res) {
+    //req.params
+    const { id } = req.params
+
+    const foundTeacher = data.teachers.find(function(teacher) {
+        return id == teacher.id
+    })
+
+    if (!foundTeacher) return res.send("Teacher not found")
+
+    const teacher = {
+        ...foundTeacher,
+        age: age(foundTeacher.birth),
+        scholarity: graduation(foundTeacher.scholarity),
+        matters: foundTeacher.matters.split(","),
+        created_at: new Intl.DateTimeFormat("pt-BR").format(foundTeacher.created_at),
+    }
+
+    return res.render("teachers/show", { teacher })
+}
+
+//Edit
+exports.edit = function(req, res) {
+     //req.params
+     const { id } = req.params
+
+     const foundTeacher = data.teachers.find(function(teacher) {
+        return id == teacher.id
+    })
+
+    if(!foundTeacher) return res.send("Teacher not found")
+
+    const teacher = {
+        ...foundTeacher,
+        birth: date(foundTeacher.birth)
+    }
+
+    return res.render("teachers/edit", { teacher })
 }
 

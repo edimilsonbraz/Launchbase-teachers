@@ -5,18 +5,18 @@
       "avatar_url": "http://google.com",
       "name": "Daniel Araujo",
       "birth": 339984000000,
-      "scholarity": "ensinosuperior",
-      "lesson": "on",
-      "matter": "Fisica, Matemática",
+      "scholarity": "Ensino Superior",
+      "lesson": "Presencial",
+      "matters": "Fisica, Matemática",
       "created_at": 1594234541324
     },
     {
       "avatar_url": "http:google.com",
-      "name": "Fafael Ribeiro",
+      "name": "Rafael Ribeiro",
       "birth": 652406400000,
       "scholarity": "mestrado",
-      "lesson": "on",
-      "matter": "Português, inglês",
+      "lesson": "Presencial",
+      "matters": "Português, inglês",
       "created_at": 1594234865785,
       "id": 2
     },
@@ -25,9 +25,9 @@
       "avatar_url": "http://google.com",
       "name": "Mayke Brito",
       "birth": 655516800000,
-      "scholarity": "ensinomedio",
-      "lesson": "on",
-      "matter": "Front-end, javaScript",
+      "scholarity": "Ensino Medio",
+      "lesson": "À distancia",
+      "matters": "Front-end, javaScript",
       "created_at": 1594235306123
     },
     {
@@ -36,9 +36,59 @@
       "name": "Fabiano Ferreira",
       "birth": 158544000000,
       "scholarity": "Mestrado",
-      "lesson": "À distancia",
-      "matter": "Dentista",
+      "lesson": "Presencial",
+      "matters": "Dentista",
       "created_at": 1594236106215
+    },
+    {
+      "id": 5,
+      "avatar_url": "http:google.com",
+      "name": "Michele Batista",
+      "birth": 975628800000,
+      "scholarity": "Ensino Medio",
+      "lesson": "À distancia",
+      "matters": "informatica",
+      "created_at": 1594407580929
+    },
+    {
+      "id": 6,
+      "avatar_url": "http://google.com",
+      "name": "Renata Amorin",
+      "birth": 647308800000,
+      "scholarity": "Doutorado",
+      "lesson": "Presencial",
+      "matters": "Geografia, História",
+      "created_at": 1594407678013
+    },
+    {
+      "id": 7,
+      "avatar_url": "http://google.com",
+      "name": "Arthur Ferreira",
+      "birth": -312163200000,
+      "scholarity": "Doutorado",
+      "lesson": "Presencial",
+      "matters": "Filosofia, Teologia, Historia",
+      "created_at": 1594414462531
+    },
+    {
+      "id": 8,
+      "avatar_url": "http:google.com",
+      "name": "Eduardo Braz",
+      "birth": 394502400000,
+      "scholarity": "EMC",
+      "lesson": "Presencial",
+      "matters": "Direito",
+      "created_at": 1594432994224
+    },
+    {
+      "id": 9,
+      "avatar_url": "http:google.com",
+      "name": "Michele Batista Sousa",
+      "birth": 976579200000,
+      "scholarity": "MC",
+      "lesson": "A",
+      "matters": "Gramatica, Redação",
+      "created_at": 1594472959411
     }
   ]
 }

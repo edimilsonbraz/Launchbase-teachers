@@ -2,8 +2,10 @@
 
 {% block content %}
 <div class="card">
-    <section class="avatar" style="background: url(https://source.unsplash.com/collection/10553730/500x500) no-repeat center center / cover">
-        
+    <section 
+        class="avatar" 
+        style="background: url({{ teacher.avatar_url}}) 
+        no-repeat center center / cover">
     </section>
 
     <section class="details">
@@ -13,37 +15,41 @@
 
         <div class="item">
             <div>Professor</div>
-            <div>Roger Franco</div>
+            <div>{{ teacher.name }}</div>
         </div>
 
         <div class="item">
             <div>Idade</div>
-            <div>36</div>
+            <div>{{ teacher.age}}</div>
         </div>
 
         <div class="item">
             <div>Grau de Escolaridade</div>
-            <div>Pós-graduado</div>
+            <div>{{ teacher.graduation }}</div>
         </div>
 
         <div class="item">
             <div>Tipo de Aula</div>
-            <div>presencial</div>
+            <div>{{ teacher.lesson }}</div>
         </div>
 
         <div class="item">
             <div>Matérias que leciona</div>
             <div>
-                <span>Português</span>
-                <span>Inglês</span>
+            {% for matter in teacher.matters %}    
+                <span>{{ matter}}</span>
+            {% endfor %}
             </div>
         </div>
 
-         <div class="item">
+        <div class="item">
             <div>Membro Desde</div>
-            <div>01/01/2020</div>
+            <div>{{ teacher.created_at}}</div>
         </div>
+
+        <a class="button" href='/teachers/{{teacher.id}}/edit'>Editar</a>
 
     </section>
 </div>
+
 {% endblock content %}
