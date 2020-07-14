@@ -69,7 +69,7 @@ header {
 
     /* grid dividido ao meio*/
     display: grid;
-    grid-template-columns: 40% 60%;
+    grid-template-columns: 50% 50%; /* DEPOIS MUDAR PARA 40% 60%*/
 
     /*sobra da caixa primeiro px = eixo x  / segundo pixel = eixo y / terceiro pixel = borrar*/
     box-shadow: 5px 5px 20px rgba(255, 245, 245, 0.253);
@@ -177,23 +177,35 @@ input::placeholder {
 
 button[type="submit"],
 a.button {
-    background-color: #FFDE01;
+    background-color: var(--color-green);
     color: white;
-    width: 86%;
+    /* width: 86%; */
     padding: 16px 32px;
     border-radius: 4px;
-    margin: 32px;
+    margin: 25px;
     font-size: 16px;
     font-weight: bold;
     text-decoration: none;
-
     cursor: pointer;
-
+    
+    
 }
 
 a.button {
-    display: block;
+    display: inline-block;
     box-sizing: border-box;
     text-decoration: none;
     text-align: center;
+    
+}
+
+#form-delete button[type="submit"] {
+    background-color: lightcoral;
+    display: inline-block;
+       
+}
+        
+.newbutton {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
