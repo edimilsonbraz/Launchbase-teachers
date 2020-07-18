@@ -15,7 +15,7 @@
       "name": "Fernanda Oliveira Silva",
       "birth": 449020800000,
       "email": "fernanda@gmail.com",
-      "school_year": "",
+      "school_year": "9EF",
       "subjects": "Python, PHP",
       "workload": "15"
     },
@@ -87,7 +87,7 @@
       "name": "Amaral Soares Reis",
       "birth": 173664000000,
       "scholarity": "DC",
-      "lesson": "Presencial",
+      "lesson": "À Distancia",
       "matters": "SQL",
       "created_at": 1595036240577
     }

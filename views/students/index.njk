@@ -1,7 +1,14 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-    <a classe="create" href="/students/create">Novo</a>
+
+    <div class="barra_superior">
+        <a class="create" href="/students/create">Novo</a>
+        <input class="pesquisa" type="text" name="pesquisa">
+        <a class="create" href="#">Pesquisar</a>
+    </div>
+
+
     <div class="card table-container">
         
         <table width="100%">

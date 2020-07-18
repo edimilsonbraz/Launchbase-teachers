@@ -63,14 +63,14 @@ header {
 .card {
     background-color: white;
     width: 800px;
-    min-height: 400px;
+    min-height: 250px;
 
     /* espaçamento ao centro*/
     margin: 45px auto;
 
     /* grid dividido ao meio*/
     display: grid;
-    grid-template-columns: 1fr 1fr; /* DEPOIS MUDAR PARA 40% 60%*/
+    grid-template-columns: 40% 60%; /* DEPOIS MUDAR PARA 40% 60%*/
 
     /*sobra da caixa primeiro px = eixo x  / segundo pixel = eixo y / terceiro pixel = borrar*/
     box-shadow: 5px 5px 20px rgba(255, 245, 245, 0.253);
@@ -101,6 +101,7 @@ header {
     padding: 15px;
     height: 100%;
     top: 0;
+    
 }
 
 .details .item {
@@ -182,7 +183,7 @@ button[type="submit"],
 a.button {
     background-color: var(--color-green);
     color: white;
-    /* width: 86%; */
+    width: 75%; 
     padding: 16px 32px;
     border-radius: 4px;
     margin: 25px;
@@ -195,20 +196,26 @@ a.button {
     
 }
 
-a.button {
+a.button {      
     display: inline-block;
     box-sizing: border-box;
     text-decoration: none;
     text-align: center;
     
 }
-a.create {
+a.create {  /*BOTÃO NOVO*/
     color: white;
     text-decoration: none;
-    position: absolute;
-    right: 275px;
+    /* position: absolute; */
+    /* right: 275px; */
+    display: inline-block;
+    text-align: center;
+    padding: 8px 16px;
 }
-
+a.create:hover {
+    background-color: rgb(50, 224, 50);
+    color: #777;
+}
 /* BOTÕES EDITAR / DELETAR */
 #form-delete button[type="submit"] {
     background-color: lightcoral;
@@ -267,7 +274,8 @@ td, th {
      border: 2px solid rgb(83, 255, 83);
  }
 
- tbody tr td:last-child a {
+ tbody tr td:last-child a,
+ a.create {
      text-decoration: none;
      background-color: rgb(83, 255, 83);
      padding: 8px 16px;
@@ -291,3 +299,20 @@ td, th {
     margin-right: 4px;
     border-radius: 10px;
 }  
+
+.barra_superior {
+    /* display: grid;
+    grid-template-columns:  20% 1fr 20%; */
+    width: 800px;
+    margin: 45px auto;
+    /* align-items: center; */
+}
+
+input.pesquisa {
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #555;
+    font-weight: bold;
+    width: 300px;
+    margin: 0 20px 0 290px;
+}

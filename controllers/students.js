@@ -1,10 +1,19 @@
 const fs = require('fs')//fire sistem ... arquivos do sistema que vai criar e grava o arquivo .json
 const data = require("../data.json")
 const Intl = require('intl')
-const { age, date, grade} = require('../utils')
+const { date, grade} = require('../utils')
 
 
 exports.index = function(req, res) {
+
+    // const foundStudent = data.students.find(function(student) {
+        
+    // })
+    // const student = {
+    //     ...foundStudent,
+    //     grade: grade(foundStudent.school_year),
+        
+    // }
     
 //     let students = data.students.map( student => {
         
@@ -73,6 +82,7 @@ exports.show = function(req, res) {
     const student = {
         ...foundStudent,
         birth: date(foundStudent.birth).birthDay,
+        school_year: grade(foundStudent.school_year),
         created_at: new Intl.DateTimeFormat('pt-BR').format(foundStudent.created_at),
     }
 
