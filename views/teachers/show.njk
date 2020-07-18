@@ -1,7 +1,9 @@
 {% extends "layout.njk" %}
 
 {% block content %}
+
 <div class="card">
+    
     <section 
         class="avatar" 
         style="background: url({{ teacher.avatar_url}}) 
@@ -25,7 +27,7 @@
 
         <div class="item">
             <div>Grau de Escolaridade</div>
-            <div>{{ teacher.graduation }}</div>
+            <div>{{ teacher.scholarity }}</div>
         </div>
 
         <div class="item">
@@ -56,6 +58,7 @@
             </form>
         </div>
 
+                 {% include '../confirm.njk' %}
     </section>
 </div>
 

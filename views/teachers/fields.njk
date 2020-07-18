@@ -67,19 +67,15 @@
                     <input 
                         type="radio" 
                         name="lesson" 
-                        value="P"
-                        {% if teacher.lesson == 'P' %} 
-                        checked
-                        {% endif %}>Presencial
+                        value="Presencial"
+                    >Presencial
                 </span>
                 <span>
                     <input 
                         type="radio" 
                         name="lesson" 
-                        value="A"
-                        {% if teacher.lesson == 'A' %} 
-                        checked
-                        {% endif %}>À Distancia
+                        value="À Distancia"
+                    >À Distancia
                 </span>
             </div>
         </div>
@@ -90,8 +86,8 @@
                 <input 
                     type="text" 
                     name="matters"
-                    placeholder="Separe as matérias que pode atuar por vírgula"
-                    value="{{ teachers.matters }}"
+                    placeholder="Separe as matérias por vírgula"
+                    value="{{ teacher.matters }}"
                 >
             </div>
         </div>

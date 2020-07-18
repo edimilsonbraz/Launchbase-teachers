@@ -1,8 +1,28 @@
 const fs = require('fs')//fire sistem ... arquivos do sistema que vai criar e grava o arquivo .json
-const data = require("./data.json")
-const { age, date, graduation } = require('./utils')
+const data = require("../data.json")
+const Intl = require('intl')
+const { age, date, graduation } = require('../utils')
 
-//Create
+
+exports.index = function(req, res) {
+    
+//     let teachers = data.teachers.map( teacher => {
+        
+//         const newTeacher = {
+//               ...teacher,
+//               matters: teacher.matters.split(",")
+//         }
+//         return newTeacher
+//   })
+
+    return res.render("teachers/index", { teachers: data.teachers })
+}
+
+exports.create = function(req, res) {
+
+    return res.render("teachers/create")
+}
+
 exports.post = function(req, res) {
  
     const keys = Object.keys(req.body)
@@ -18,7 +38,13 @@ exports.post = function(req, res) {
 
     birth = Date.parse(birth)
     const created_at = Date.now()
-    id = Number(data.teachers.length + 1)
+    
+    let id = 1
+    const lastStudent = data.students[data.students.length - 1]
+
+    if(lastStudent) {
+        id = lastStudent.id +1
+    }
 
     data.teachers.push({        //desestruturação do Objeto req.body
         id,
@@ -41,7 +67,6 @@ exports.post = function(req, res) {
         //return res.send(req.body)
 }
 
-//Show
 exports.show = function(req, res) {
     //req.params
     const { id } = req.params
@@ -57,13 +82,13 @@ exports.show = function(req, res) {
         age: age(foundTeacher.birth),
         scholarity: graduation(foundTeacher.scholarity),
         matters: foundTeacher.matters.split(","),
-        created_at: new Intl.DateTimeFormat("pt-BR").format(foundTeacher.created_at),
+        created_at: new Intl.DateTimeFormat('pt-BR').format(foundTeacher.created_at),
     }
 
     return res.render("teachers/show", { teacher })
+
 }
 
-//Edit
 exports.edit = function(req, res) {
      //req.params
      const { id } = req.params
@@ -76,13 +101,12 @@ exports.edit = function(req, res) {
 
     const teacher = {
         ...foundTeacher,
-        birth: date(foundTeacher.birth)
+        birth: date(foundTeacher.birth).iso
     }
 
     return res.render("teachers/edit", { teacher })
 }
 
-//Update
 exports.update = function(req, res) {
     const { id } = req.body
     let index = 0
@@ -99,7 +123,8 @@ exports.update = function(req, res) {
     const teacher = {
         ...foundTeacher,
         ...req.body,
-        birth: Date.parse(req.body.birth)
+        birth: Date.parse(req.body.birth),
+        id: Number(req.body.id) //transforma a string em um numero
     }
 
     data.teachers[index] = teacher
@@ -111,7 +136,6 @@ exports.update = function(req, res) {
 
 }
 
-//Delete
 exports.delete = function(req, res) {
     const { id } = req.body
 
@@ -127,3 +151,4 @@ exports.delete = function(req, res) {
         return res.redirect("/teachers")
     })
 }
+
