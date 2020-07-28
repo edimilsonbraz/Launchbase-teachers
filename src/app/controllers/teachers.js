@@ -1,7 +1,4 @@
-const fs = require('fs')//fire sistem ... arquivos do sistema que vai criar e grava o arquivo .json
-const data = require("../data.json")
-const Intl = require('intl')
-const { age, date, graduation } = require('../utils')
+const { age, date, graduation } = require('../../lib/utils')
 
 
 exports.index = function(req, res) {
