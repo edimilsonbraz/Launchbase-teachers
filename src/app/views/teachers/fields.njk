@@ -29,7 +29,7 @@
                 <input 
                     type="date" 
                     name="birth"
-                    value="{{ teacher.birth_date }}"
+                    value="{{ teacher.birth }}"
                 >
             </div>
         </div>
@@ -66,14 +66,14 @@
                 <span>
                     <input 
                         type="radio" 
-                        name="lesson" 
+                        name="class_type" 
                         value="Presencial"
                     >Presencial
                 </span>
                 <span>
                     <input 
                         type="radio" 
-                        name="lesson" 
+                        name="class_type" 
                         value="À Distancia"
                     >À Distancia
                 </span>
@@ -85,7 +85,7 @@
             <div>
                 <input 
                     type="text" 
-                    name="matters"
+                    name="subjects_taught"
                     placeholder="Separe as matérias por vírgula"
                     value="{{ teacher.subjects_taught }}"
                 >

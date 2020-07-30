@@ -1,5 +1,4 @@
 const { age, date, graduation } = require('../../lib/utils')
-
 const Teacher = require('../models/Teacher')
 
 
@@ -41,8 +40,9 @@ module.exports = {
         Teacher.find(req.params.id, function(teacher) {
             if(!teacher) return res.send("Teacher not found")
 
-            teacher.age = age(teacher.birth_date)
+            teacher.age = age(teacher.birth)
             teacher.subjects_taught = teacher.subjects_taught.split(",")
+            teacher.education_level = graduation(teacher.education_level)
             teacher.created_at = date(teacher.created_at).format
 
             return res.render("teachers/show", { teacher })
@@ -54,13 +54,14 @@ module.exports = {
         Teacher.find(req.params.id, function(teacher) {
             if(!teacher) return res.send("Teacher not found")
 
-            teacher.birth_date = date(teacher.birth_date).iso
+            teacher.birth = date(teacher.birth).iso
 
             return res.render("teachers/edit", { teacher })
 
         })
     },
     update(req, res) {
+
         const keys = Object.keys(req.body) //CRIA UM OBJETO QUE TEM VARIAS FUNÇÕES// CRIOU UM ARRAY DE CHAVES -> { }
 
         for (key of keys) { 
@@ -75,7 +76,11 @@ module.exports = {
 
     },
     delete(req, res) {
-        return
+        
+        Teacher.delete(req.body.id, function() {
+            return res.redirect(`/teachers`)
+        })
+    
     },
 }
 

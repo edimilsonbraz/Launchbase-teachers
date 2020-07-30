@@ -31,8 +31,8 @@ module.exports = {
 
         }
     },
-    graduation(scholarity) {
-        switch (scholarity){
+    graduation(education_level) {
+        switch (education_level){
             case "EMC": return "Ensino Médio Completo"
             case "ESC": return "Superior Completo"
             case "MC": return "Mestrado"
