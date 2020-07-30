@@ -29,7 +29,7 @@
                 <input 
                     type="date" 
                     name="birth"
-                    value="{{ teacher.birth }}"
+                    value="{{ teacher.birth_date }}"
                 >
             </div>
         </div>
@@ -37,23 +37,23 @@
         <div class="item">
             <div>Grau de escolaridade</div>
             <div>
-               <select name="scholarity">
+               <select name="education_level">
                    <option value="" selected >Escolha uma opção</option>
 
                    <option 
-                        value="EMC" {% if teacher.scholarity == 'EMC' %}
+                        value="EMC" {% if teacher.education_level == 'EMC' %}
                         selected {% endif %}>Ensino Médio Completo
                     </option>
                     <option 
-                        value="ESC" {% if teacher.scholarity == 'ESC' %}
+                        value="ESC" {% if teacher.education_level == 'ESC' %}
                         selected {% endif %}>Superior Completo
                     </option>
                     <option 
-                        value="MC" {% if teacher.scholarity == 'MC' %}
+                        value="MC" {% if teacher.education_level == 'MC' %}
                         selected {% endif %}>Mestrado
                     </option>
                     <option 
-                        value="DC" {% if teacher.scholarity == 'DC' %}
+                        value="DC" {% if teacher.education_level == 'DC' %}
                         selected {% endif %}>Doutorado
                     </option>
                 </select>
@@ -87,7 +87,7 @@
                     type="text" 
                     name="matters"
                     placeholder="Separe as matérias por vírgula"
-                    value="{{ teacher.matters }}"
+                    value="{{ teacher.subjects_taught }}"
                 >
             </div>
 

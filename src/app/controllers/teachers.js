@@ -1,9 +1,11 @@
 const { age, date, graduation } = require('../../lib/utils')
 
+const Teacher = require('../models/Teacher')
 
-exports.index = function(req, res) {
-    
-//     let teachers = data.teachers.map( teacher => {
+
+module.exports = {
+    index(req, res) {
+        //     let teachers = data.teachers.map( teacher => {
         
 //         const newTeacher = {
 //               ...teacher,
@@ -11,141 +13,69 @@ exports.index = function(req, res) {
 //         }
 //         return newTeacher
 //   })
+        Teacher.all(function(teachers) {
+            return res.render("teachers/index", { teachers })
 
-    return res.render("teachers/index", { teachers: data.teachers })
-}
+        })
+    },
+    create(req, res) {
+        return res.render("teachers/create")
 
-exports.create = function(req, res) {
+    },
+    post(req, res) {
 
-    return res.render("teachers/create")
-}
+        const keys = Object.keys(req.body)
 
-exports.post = function(req, res) {
- 
-    const keys = Object.keys(req.body)
-
-    for (key of keys) {
-        //req.body.avatar_url == ""
-        if (req.body[key] == "") {
-            return res.send('Please, fill all fields!')
+        for (key of keys) {
+            if (req.body[key] == "") {
+                return res.send('Please, fill all fields!')
+            }
         }
-    }
 
-    let {avatar_url, birth, name, scholarity, matters, lesson} = req.body
+        Teacher.create(req.body, function(teacher) {
+            return res.redirect(`/teachers/${teacher.id}`)
+        })
+    },
+    show(req, res) {
 
-    birth = Date.parse(birth)
-    const created_at = Date.now()
-    
-    let id = 1
-    const lastStudent = data.students[data.students.length - 1]
+        Teacher.find(req.params.id, function(teacher) {
+            if(!teacher) return res.send("Teacher not found")
 
-    if(lastStudent) {
-        id = lastStudent.id +1
-    }
+            teacher.age = age(teacher.birth_date)
+            teacher.subjects_taught = teacher.subjects_taught.split(",")
+            teacher.created_at = date(teacher.created_at).format
 
-    data.teachers.push({        //desestruturação do Objeto req.body
-        id,
-        avatar_url,
-        name,
-        birth,
-        scholarity,
-        lesson,
-        matters,
-        created_at,
-    })
+            return res.render("teachers/show", { teacher })
 
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err) { 
-        //esse metodo grava e gera um arquivo JSON
-        if (err) return res.send("Write file error!") 
+        })
+    },
+    edit(req, res) {
 
-        return res.redirect("/teachers")// ao termino do salvamento redireciona pra essa pg
-    })
+        Teacher.find(req.params.id, function(teacher) {
+            if(!teacher) return res.send("Teacher not found")
 
-        //return res.send(req.body)
-}
+            teacher.birth_date = date(teacher.birth_date).iso
 
-exports.show = function(req, res) {
-    //req.params
-    const { id } = req.params
+            return res.render("teachers/edit", { teacher })
 
-    const foundTeacher = data.teachers.find(function(teacher) {
-        return id == teacher.id
-    })
+        })
+    },
+    update(req, res) {
+        const keys = Object.keys(req.body) //CRIA UM OBJETO QUE TEM VARIAS FUNÇÕES// CRIOU UM ARRAY DE CHAVES -> { }
 
-    if (!foundTeacher) return res.send("Teacher not found")
-
-    const teacher = {
-        ...foundTeacher,
-        age: age(foundTeacher.birth),
-        scholarity: graduation(foundTeacher.scholarity),
-        matters: foundTeacher.matters.split(","),
-        created_at: new Intl.DateTimeFormat('pt-BR').format(foundTeacher.created_at),
-    }
-
-    return res.render("teachers/show", { teacher })
-
-}
-
-exports.edit = function(req, res) {
-     //req.params
-     const { id } = req.params
-
-     const foundTeacher = data.teachers.find(function(teacher) {
-        return id == teacher.id
-    })
-
-    if(!foundTeacher) return res.send("Teacher not found")
-
-    const teacher = {
-        ...foundTeacher,
-        birth: date(foundTeacher.birth).iso
-    }
-
-    return res.render("teachers/edit", { teacher })
-}
-
-exports.update = function(req, res) {
-    const { id } = req.body
-    let index = 0
-
-    const foundTeacher = data.teachers.find(function(teacher, foundIndex) {
-        if(id == teacher.id) {
-            index = foundIndex
-            return true
+        for (key of keys) { 
+            if (req.body[key] == "") {
+                return res.send('Please, fill all fields!')
+            }
         }
-    })
 
-    if(!foundTeacher) return res.send("Teacher not Found")
+       Teacher.update(req.body, function() {
+           return res.redirect(`/teachers/${req.body.id}`)
+        })
 
-    const teacher = {
-        ...foundTeacher,
-        ...req.body,
-        birth: Date.parse(req.body.birth),
-        id: Number(req.body.id) //transforma a string em um numero
-    }
-
-    data.teachers[index] = teacher
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err) {
-        if(err) return res.send("Write file error / method put")
-
-        return res.redirect(`/teachers/${id}`)
-    })
-
-}
-
-exports.delete = function(req, res) {
-    const { id } = req.body
-
-    const filteredTeachers = data.teachers.filter(function(teacher) {
-        return teacher.id != id
-    })
-
-    data.teachers = filteredTeachers
-
-    fs.writeFile("data.json", JSON.stringify(data, null, 2), function(err) {
-        if(err) return res.send("Write file error")
-
-        return res.redirect("/teachers")
-    })
+    },
+    delete(req, res) {
+        return
+    },
 }
 
