@@ -4,6 +4,7 @@ const Teacher = require('../models/Teacher')
 
 module.exports = {
     index(req, res) {
+        const { filter } = req.query
         //     let teachers = data.teachers.map( teacher => {
         
 //         const newTeacher = {
@@ -12,10 +13,18 @@ module.exports = {
 //         }
 //         return newTeacher
 //   })
-        Teacher.all(function(teachers) {
-            return res.render("teachers/index", { teachers })
+        if ( filter ) {
+            Teacher.findBy(filter, function(teachers) {
+                return res.render("teachers/index", { teachers , filter})
 
-        })
+            })
+        } else {
+            Teacher.all(function(teachers) {
+                return res.render("teachers/index", { teachers })
+    
+            })
+        }
+        
     },
     create(req, res) {
         return res.render("teachers/create")

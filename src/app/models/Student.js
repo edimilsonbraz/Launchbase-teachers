@@ -25,8 +25,9 @@ module.exports = {
                 school_year,
                 subjects,
                 workload,
-                created_at
-            ) VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+                created_at,
+                teacher_id	integer
+            ) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
             RETURNING id
         `
 
@@ -38,7 +39,8 @@ module.exports = {
             data.school_year,
             data.subjects,
             data.workload,
-            date(Date.now()).iso
+            date(Date.now()).iso,
+            data.teacher
 
         ]
 
@@ -51,9 +53,10 @@ module.exports = {
     },
     find(id, callback) {
         db.query(`
-        SELECT * 
+        SELECT students.*, teachers.name AS teacher_name 
         FROM students 
-        WHERE id = $1`, [id], function(err, results) {
+        LEFT JOIN teachers ON (students.teacher_id = teachers.id)
+        WHERE students.id = $1`, [id], function(err, results) {
                 if(err) throw "Database Error!Find"
 
                 callback(results.rows[0])
@@ -69,8 +72,9 @@ module.exports = {
             email=($4),
             school_year=($5),
             subjects=($6),
-            workload=($7)
-        WHERE id = $8
+            workload=($7),
+            teacher_id=($8)
+        WHERE id = $9
         `
 
         const values = [
@@ -81,6 +85,7 @@ module.exports = {
             data.school_year,
             data.subjects,
             data.workload,
+            data.teacher,
             data.id
         ]
         db.query(query, values, function(err, results) {
@@ -96,6 +101,13 @@ module.exports = {
 
             return callback()
 
+        })
+    },
+    teachersSelectOptions(callback) {
+        db.query(`SELECT name, id FROM teachers`, function(err, results) {
+            if (err) throw 'Database Error!SelectOpt'
+
+            callback(results.rows)
         })
     }
 }

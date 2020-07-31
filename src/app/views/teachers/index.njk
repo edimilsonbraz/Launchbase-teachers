@@ -1,11 +1,19 @@
 {% extends "layout.njk" %}
 
 {% block content %}
-
-    <div class="barra_superior">
+<div class="container">
+    
+    <div class="header">
         <a class="create" href="/teachers/create">Novo</a>
-        <input class="pesquisa" type="text" name="pesquisa">
-        <a class="create" href="#">Pesquisar</a>
+        <form action="/teachers" method="GET">
+            <input 
+                type="text"
+                name="filter"
+                placeholder="Nome ou Acompanhamento"
+                value="{{filter}}"
+            >
+            <button class="filter" type="submit">Filtrar</button>
+        </form>
     </div>
 
 
@@ -28,10 +36,11 @@
                         {{ teacher.name}}
                     </td>
                     <td>
-                        {# {% for matter in teacher.matters %} #}
+                        {# {% for subjects_taught in teacher.subjects_taught %} #}
                         <span class="item">{{teacher.subjects_taught}}</span>
                         {# {% endfor %} #}
                     </td>
+
                     <td><a href="/teachers/{{teacher.id}}">ver</a></td>
                 </tr>
                 {% endfor %}
@@ -39,4 +48,5 @@
         </table>
         
     </div>
+</div>
 {% endblock content %}
