@@ -326,6 +326,30 @@ td, th {
 }
 
 
+/*==== PAGINATION ====*/
+.pagination {
+    text-align: center;
+}
+.pagination a,
+.pagination span {
+    color: white;
+    text-decoration: none;
+    margin-right: 16px;
+    align-items: center;
+}
+
+.pagination a:hover {
+    color: var(--color-green); 
+    border-bottom: 1px solid var(--color-green);
+    font-weight: bold;
+    
+}
+.pagination a:checked {
+    color: var(--color-green);
+    font-weight: bold;
+}
+
+
 
 
 
