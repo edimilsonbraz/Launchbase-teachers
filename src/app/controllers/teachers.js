@@ -29,8 +29,6 @@ module.exports = {
         Teacher.paginate(params)
         
     },
-     
-
     create(req, res) {
         return res.render("teachers/create")
 
