@@ -17,8 +17,8 @@ function paginate(selectedPage, totalPages) {
     for(let currentPage = 1; currentPage <= totalPages; currentPage ++) {
 
         const firstAndLastPage = currentPage == 1 || currentPage == totalPages
-        const pagesAfterSelectedPage = currentPage <= selectedPage +1
-        const pagesBeforeSelectedPage = currentPage >= selectedPage -1
+        const pagesAfterSelectedPage = currentPage <= selectedPage + 2
+        const pagesBeforeSelectedPage = currentPage >= selectedPage - 2
 
         if(firstAndLastPage || pagesBeforeSelectedPage && pagesAfterSelectedPage) {
             if(oldPage && currentPage - oldPage > 2) {

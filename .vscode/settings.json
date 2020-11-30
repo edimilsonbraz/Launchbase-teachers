@@ -1,0 +1,30 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.wordWrap": "on",
+    "workbench.colorTheme": "Launchbase Theme",
+    "workbench.iconTheme": "material-icon-theme",
+    "window.zoomLevel": 1,
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "emmet.includeLanguages": {
+        "njk": "html"
+    },
+    "sync.autoDownload": true,
+    "sync.autoUpload": true,
+    "sync.quietSync": true,
+    "sync.gist": "7b56dc92335078efe1a547689983d347",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.minimap.enabled": false,
+    "liveServer.settings.donotVerifyTags": true,
+    "material-icon-theme.folders.color": "#42a5f5",
+    
+    "editor.fontLigatures": true,
+
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "typescript.updateImportsOnFileMove.enabled": "never",
+
+    "emmet.syntaxProfiles": { "javascript": "jsx" },
+    "javascript.suggest.autoImports": true,
+    "typescript.suggest.autoImports": true,
+    "editor.fontSize": 14,
+}

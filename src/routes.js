@@ -1,31 +1,31 @@
 const express = require('express')
 const routes = express.Router()
-const teachers = require('./app/controllers/teachers')
-const students = require('./app/controllers/students')
+const teacher = require('./app/controllers/TeacherController')
+const student = require('./app/controllers/StudentController')
 
 
 routes.get('/', function(req, res) {
     return res.redirect("/teachers")
 })
 
-routes.get('/teachers', teachers.index)
-routes.get('/teachers/create', teachers.create)
-routes.get('/teachers/:id', teachers.show)
-routes.get('/teachers/:id/edit', teachers.edit)
-routes.post("/teachers", teachers.post) 
-routes.put("/teachers", teachers.update)
-routes.delete("/teachers", teachers.delete)
+routes.get('/teachers', teacher.index)
+routes.get('/teachers/create', teacher.create)
+routes.get('/teachers/:id', teacher.show)
+routes.get('/teachers/:id/edit', teacher.edit)
+routes.post("/teachers", teacher.post) 
+routes.put("/teachers", teacher.update)
+routes.delete("/teachers", teacher.delete)
 
 
 
 
-routes.get('/students', students.index)
-routes.get('/students/create', students.create )
-routes.get('/students/:id', students.show)
-routes.get('/students/:id/edit', students.edit)
-routes.post("/students", students.post) 
-routes.put("/students", students.update)
-routes.delete("/students", students.delete)
+routes.get('/students', student.index)
+routes.get('/students/create', student.create )
+routes.get('/students/:id', student.show)
+routes.get('/students/:id/edit', student.edit)
+routes.post("/students", student.post) 
+routes.put("/students", student.update)
+routes.delete("/students", student.delete)
 
 
 module.exports = routes
