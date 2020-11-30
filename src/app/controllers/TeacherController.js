@@ -8,6 +8,7 @@ module.exports = {
         try {
              //Teachers 
             const teachers = await Teacher.findAll()
+           
 
             return res.render("teachers/index", {teachers})
         } catch (error) {
@@ -31,6 +32,11 @@ module.exports = {
         // let teachers = results.rows
 
         // let mathTotal = teachers[0] == undefined ? 0 : Math.ceil(teachers[0].total / limit )
+
+         
+        // for (let teacher of teachers) {
+        //     teacher.subjects_taught = teacher.subjects_taught.split(',')
+        // }
 
         // const pagination = {
         //     total: mathTotal,
@@ -69,66 +75,119 @@ module.exports = {
         return res.render("teachers/create")
 
     },
-    post(req, res) {
+    async post(req, res) {
+        try {
+            const keys = Object.keys(req.body)
 
-        const keys = Object.keys(req.body)
-
-        for (key of keys) {
-            if (req.body[key] == "") {
-                return res.send('Please, fill all fields!')
+            for (key of keys) {
+                if (req.body[key] == "") {
+                    return res.send('Please, fill all fields!')
+                }
             }
+
+            let {
+                name,
+                avatar_url,
+                birth,
+                education_level,
+                class_type,
+                subjects_taught
+            } = req.body
+
+            const teacherId = await Teacher.create(req.body, {
+                name,
+                avatar_url,
+                birth,
+                education_level,
+                class_type,
+                subjects_taught
+            }) 
+
+            return res.redirect(`/teachers/${teacherId}`)
+        
+        } catch (error) {
+            
         }
-
-        Teacher.create(req.body, function(teacher) {
-            return res.redirect(`/teachers/${teacher.id}`)
-        })
+        
     },
-    show(req, res) {
+    async show(req, res) {
+        try {
+            const teacher = await Teacher.find(req.params.id) 
 
-        Teacher.find(req.params.id, function(teacher) {
             if(!teacher) return res.send("Teacher not found")
-
+    
             teacher.age = age(teacher.birth)
             teacher.subjects_taught = teacher.subjects_taught.split(",")
             teacher.education_level = graduation(teacher.education_level)
             teacher.created_at = date(teacher.created_at).format
 
             return res.render("teachers/show", { teacher })
-
-        })
+    
+        } catch (error) {
+            console.error(error)
+        }
+        
     },
-    edit(req, res) {
+    async edit(req, res) {
+        try {
+            const teacher = await Teacher.find(req.params.id) 
 
-        Teacher.find(req.params.id, function(teacher) {
             if(!teacher) return res.send("Teacher not found")
 
             teacher.birth = date(teacher.birth).iso
 
             return res.render("teachers/edit", { teacher })
-
-        })
-    },
-    update(req, res) {
-
-        const keys = Object.keys(req.body) //CRIA UM OBJETO QUE TEM VARIAS FUNÇÕES// CRIOU UM ARRAY DE CHAVES -> { }
-
-        for (key of keys) { 
-            if (req.body[key] == "") {
-                return res.send('Please, fill all fields!')
-            }
-        }
-
-       Teacher.update(req.body, function() {
-           return res.redirect(`/teachers/${req.body.id}`)
-        })
-
-    },
-    delete(req, res) {
-        
-        Teacher.delete(req.body.id, function() {
-            return res.redirect(`/teachers`)
-        })
     
+            
+        } catch (error) {
+            console.error(error)
+        }
+        
+    },
+    async update(req, res) {
+        try {
+            const keys = Object.keys(req.body) 
+            for (key of keys) { 
+                if (req.body[key] == "") {
+                    return res.send('Please, fill all fields!')
+                }
+            }
+
+            const {
+                name,
+                avatar_url,
+                birth,
+                education_level,
+                class_type,
+                subjects_taught
+            } = req.body
+           
+            await Teacher.update(req.body.id, {
+                name,
+                avatar_url,
+                birth,
+                education_level,
+                class_type,
+                subjects_taught
+            }) 
+            
+            return res.redirect(`/teachers/${req.body.id}`)
+        
+        } catch (error) {
+            console.error(error)
+        }
+        
+
+    },
+    async delete(req, res) {
+        try {
+            await Teacher.delete(req.body.id)
+
+            return res.redirect(`/teachers`)
+        
+        } catch (error) {
+            console.error(error)
+        }
     },
 }
 

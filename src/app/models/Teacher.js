@@ -1,5 +1,3 @@
-const { date, graduation } = require('../../lib/utils')
-const db = require('../../config/db')
 const Base = require('./Base')
 
 
