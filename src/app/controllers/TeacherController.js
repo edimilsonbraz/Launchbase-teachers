@@ -10,11 +10,7 @@ module.exports = {
             const teachers = await Teacher.findAll()
            
 
-            return res.render("teachers/index", {teachers})
-        } catch (error) {
-            console.error(error);
-        }
-        // let { filter, page, limit } = req.query
+            // let { filter, page, limit } = req.query
 
         // page = page || 1
         // limit = limit || 3
@@ -69,6 +65,13 @@ module.exports = {
         // }
         
         // Teacher.paginate(params)
+
+
+            return res.render("teachers/index", {teachers})
+        } catch (error) {
+            console.error(error);
+        }
+        
         
     },
     create(req, res) {
@@ -78,7 +81,6 @@ module.exports = {
     async post(req, res) {
         try {
             const keys = Object.keys(req.body)
-
             for (key of keys) {
                 if (req.body[key] == "") {
                     return res.send('Please, fill all fields!')
@@ -106,7 +108,7 @@ module.exports = {
             return res.redirect(`/teachers/${teacherId}`)
         
         } catch (error) {
-            
+            console.log(error)
         }
         
     },

@@ -1,23 +1,6 @@
 const db = require('../../config/db')
 
 
-// function find(filters, table) {
-//     let query = `SELECT * FROM ${table} `
-
-//     if(filters) {
-//         Object.keys(filters).map(key => {
-//             //where | or | and
-//             query += ` ${key}`
-//             Object.keys(filters[key]).map(field => {
-//                 query += ` ${field} = '${filters[key][field]}'`
-//             })
-//         })
-//     }
-
-//     return db.query(query)
-
-// }
-
 const base = {
     init({table}) {
         if(!table) throw new Error('Ivalid params')
@@ -83,7 +66,7 @@ const base = {
     },
     delete(id) {
         return db.query(`DELETE FROM ${this.table} WHERE id = $1`, [id])
-    }, 
+    },
 
 }
 
