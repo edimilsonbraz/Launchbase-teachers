@@ -6,40 +6,39 @@ const { age, date, grade } = require('../../lib/utils')
 module.exports = {
     async index(req, res) {
         try {
+           
+            let { filter, page, limit } = req.query
+
+            page = page || 1
+            limit = limit || 3
+
+            let offset = limit * (page - 1)
+
+            const params = {
+                filter,
+                page,
+                limit,
+                offset
+            }
+
+            let results = await Student.paginate(params)
+            let students = results.rows
+
+            if (!students) return res.send('Alunos não encontrados!')
+
+            const pagination = {
+                total: Math.ceil(students[0].total / limit ),
+                page
+            }
 
             //Students
-            const students = await Student.findAll() 
+            // students = await Student.findAll() 
 
-            return res.render("students/index", {students})
-
-            // let { filter, page, limit } = req.query
-
-            // page = page || 1
-            // limit = limit || 2
-            // let offset = limit * (page - 1) //
-
-            // const params = {
-            //     filter,
-            //     page,
-            //     limit,
-            //     offset,
-            //     callback(students) {
-
-            //         const pagination = {
-            //             total: Math.ceil(students[0].total / limit),
-            //             page
-            //         }
-            //         return res.render("students/index", { students, pagination, filter })
-
-            //     }
-            // }
-            
-            // Student.paginate(params)
+            return res.render("students/index", {students, pagination, filter})
 
         } catch (error) {
             console.error(error)
         }
-        
 
     },
     async create(req, res) {

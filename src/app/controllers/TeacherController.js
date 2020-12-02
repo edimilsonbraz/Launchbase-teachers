@@ -6,68 +6,37 @@ const { age, date, graduation } = require('../../lib/utils')
 module.exports = {
     async index(req, res) {
         try {
-             //Teachers 
-            const teachers = await Teacher.findAll()
-           
+            let { filter, page, limit } = req.query
 
-            // let { filter, page, limit } = req.query
+            page = page || 1
+            limit = limit || 3
+            offset = limit * (page - 1)
 
-        // page = page || 1
-        // limit = limit || 3
+            const params = {
+                filter,
+                page,
+                limit,
+                offset
+            }
 
-        // let offset = limit * (page - 1)
+            let results = await Teacher.paginate(params)
+            let teachers = results.rows
 
-        // const params = {
-        //     filter,
-        //     page,
-        //     limit,
-        //     offset
-        // }
+            if (!teachers) return res.send('Professores não encontrados!')
 
-        // let results = await Teacher.paginate(params)
-        // let teachers = results.rows
+            const pagination = {
+                total: Math.ceil(teachers[0].total / limit ),
+                page
+            }
 
-        // let mathTotal = teachers[0] == undefined ? 0 : Math.ceil(teachers[0].total / limit )
+         //Colocar o search aqui
 
-         
-        // for (let teacher of teachers) {
-        //     teacher.subjects_taught = teacher.subjects_taught.split(',')
-        // }
+            for (let teacher of teachers) {
+                teacher.subjects_taught = teacher.subjects_taught.split(',')
+            }
 
-        // const pagination = {
-        //     total: mathTotal,
-        //     page
-        // }
+            return res.render("teachers/index", {teachers, pagination, filter})
 
-        //Colocar o search aqui
-
-       
-        
-
-        // page = page || 1
-        // limit = limit || 3
-        // let offset = limit * (page - 1) //
-
-        // const params = {
-        //     filter,
-        //     page,
-        //     limit,
-        //     offset,
-        //     callback(teachers) {
-
-        //         const pagination = {
-        //             total: Math.ceil(teachers[0].total / limit),
-        //             page
-        //         }
-                // return res.render("teachers/index", {teachers})
-
-        //     }
-        // }
-        
-        // Teacher.paginate(params)
-
-
-            return res.render("teachers/index", {teachers})
         } catch (error) {
             console.error(error);
         }
