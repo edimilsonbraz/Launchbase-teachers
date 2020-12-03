@@ -47,3 +47,12 @@ CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON teachers
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
+
+
+-- to run seeds
+DELETE FROM students;
+DELETE FROM teachers;
+
+-- restart sequence auto_increment from tables ids
+ALTER SEQUENCE students_id_seq RESTART WITH 1;
+ALTER SEQUENCE teachers_id_seq RESTART WITH 1;
