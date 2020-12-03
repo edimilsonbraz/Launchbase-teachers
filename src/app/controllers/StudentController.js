@@ -57,7 +57,10 @@ module.exports = {
             const keys = Object.keys(req.body)
             for (key of keys) {
                 if (req.body[key] == "") {
-                    return res.send('Please, fill all fields!')
+                    return res.render('students/create', {
+                        student: req.body,
+                        error: 'Por favor, preencha todos os campos.'
+                    })
                 }
             }
 
@@ -131,7 +134,9 @@ module.exports = {
             const keys = Object.keys(req.body) 
             for (key of keys) { 
                 if (req.body[key] == "") {
-                    return res.send('Please, fill all fields!')
+                    return res.render('students/index', {
+                        error: 'Por favor, preencha todos os campos.'
+                    })
                 }
             }
 

@@ -52,7 +52,11 @@ module.exports = {
             const keys = Object.keys(req.body)
             for (key of keys) {
                 if (req.body[key] == "") {
-                    return res.send('Please, fill all fields!')
+
+                    return res.render('teachers/create', {
+                        teacher: req.body,
+                        error: 'Por favor, preencha todos os campos.'
+                    })
                 }
             }
 
@@ -103,7 +107,9 @@ module.exports = {
         try {
             const teacher = await Teacher.find(req.params.id) 
 
-            if(!teacher) return res.send("Teacher not found")
+            if(!teacher) return res.render("teachers/edit", {
+                error: 'Nenhum Professor encontrado!.'
+            })
 
             teacher.birth = date(teacher.birth).iso
 
@@ -120,7 +126,9 @@ module.exports = {
             const keys = Object.keys(req.body) 
             for (key of keys) { 
                 if (req.body[key] == "") {
-                    return res.send('Please, fill all fields!')
+                    return res.render('teachers/index', {
+                        error: 'Por favor, preencha todos os campos.'
+                    })
                 }
             }
 
