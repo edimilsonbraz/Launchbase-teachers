@@ -86,10 +86,12 @@ module.exports = {
                 teacher_id: teacher
             }) 
             
-            return res.redirect(`/students/${studentId}`)
+            // return res.redirect(`/students/${studentId}`)
+            return res.render("orders/success")
         
         } catch (error) {
             console.error(error)
+            return res.render("orders/error")
         }
         
     },
@@ -162,10 +164,13 @@ module.exports = {
                 teacher_id: teacher
             })
 
-            return res.redirect(`/students/${req.body.id}`)
+            // return res.redirect(`/students/${req.body.id}`)
+            return res.render("orders/success")
     
         } catch (error) {
             console.error(error);
+
+            return res.render("orders/error")
         }
 
     },
@@ -173,10 +178,13 @@ module.exports = {
         try {
             await Student.delete(req.body.id) 
 
-            return res.redirect('/students')
+            // return res.redirect('/students')
+            return res.render("orders/deleted")
 
         } catch (error) {
             console.error(error);
+
+            return res.render("orders/error")
         }
     },
 }
